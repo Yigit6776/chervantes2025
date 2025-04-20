@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .admin-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .panel {
+            display: none;
+        }
+        .product-list, .order-list {
+            text-align: left;
+            margin-top: 20px;
+        }
+        .product-image {
+
+            max-width: 100px;
+            max-height: 100px;
+            display: block;
+            margin: 5px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Admin Panel</h2>
+        
+        <div id="login-form">
+            <h3>Giriş Yap</h3>
+            <input type="text" id="username" placeholder="Kullanıcı Adı">
+            <input type="   word" id="password" placeholder="Şifre">
+            <button onclick="login()">Giriş</button>
+        </div>
+        
+        <div id="admin-panel" class="panel">
+            <h3>Admin Paneli</h3>
+            <p>Hoş geldiniz, <span id="admin-name"></span></p>
+            <button onclick="logout()">Çıkış Yap</button>
+            
+            <h3>Ürün Yönetimi</h3>
+            <input type="text" id="product-name" placeholder="Ürün Adı">
+            <textarea id="product-description" placeholder="Ürün Açıklaması"></textarea>
+            <input type="number" id="product-price" placeholder="Fiyat">
+            <input type="file" id="product-image" accept="image/*">
+            <button onclick="addProduct()">Ürün Ekle</button>
+            <ul id="product-list" class="product-list"></ul>
+            
+            <h3>Siparişler</h3>
+            <ul id="order-list" class="order-list"></ul>
+        </div>
+    </div>
+    
+    <script>
+        let products = [];
+        let orders = [{id: 1, item: "Telefon", status: "Beklemede"}];
+
+        function login() {
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            
+            if (username === "admin" && password === "1234") {
+                document.getElementById("login-form").style.display = "none";
+                document.getElementById("admin-panel").style.display = "block";
+                document.getElementById("admin-name").innerText = username;
+                loadOrders();
+            } else {
+                alert("Hatalı giriş! Lütfen bilgileri kontrol edin.");
+            }
+        }
+
+        function logout() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("admin-panel").style.display = "none";
+        }
+
+        function addProduct() {
+            let name = document.getElementById("product-name").value;
+            let description = document.getElementById("product-description").value;
+            let price = document.getElementById("product-price").value;
+            let imageFile = document.getElementById("product-image").files[0];
+            
+            if (name && description && price && imageFile) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    let product = { id: products.length + 1, name, description, price, image: e.target.result };
+                    products.push(product);
+                    displayProducts();
+                };
+                reader.readAsDataURL(imageFile);
+            } else {
+                alert("Lütfen tüm alanları doldurun!");
+            }
+        }
+
+        function displayProducts() {
+            let productList = document.getElementById("product-list");
+            productList.innerHTML = "";
+            
+            products.forEach(product => {
+                let li = document.createElement("li");
+                li.innerHTML = `<img src="${product.image}" class="product-image"><br>
+                                <strong>${product.name}</strong><br>
+                                ${product.description}<br>
+                                <strong>${product.price} TL</strong><br>
+                                <button onclick="removeProduct(${product.id})">Sil</button>`;
+                productList.appendChild(li);
+            });
+        }
+
+        function removeProduct(id) {
+            products = products.filter(product => product.id !== id);
+            displayProducts();
+        }
+
+        function loadOrders() {
+            let orderList = document.getElementById("order-list");
+            orderList.innerHTML = "";
+            
+            orders.forEach(order => {
+                let li = document.createElement("li");
+                li.innerHTML = `${order.item} - Durum: ${order.status} <button onclick="updateOrder(${order.id})">Tamamlandı</button>`;
+                orderList.appendChild(li);
+            });
+        }
+
+        function updateOrder(id) {
+            let order = orders.find(order => order.id === id);
+            if (order) {
+                order.status = "Tamamlandı";
+                loadOrders();
+            }
+        }
+    </script>
+</body>
+</html>
