@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSepet } from '../context/SepetContext';
+import { useSepet } from '../src/context/SepetContext';
 import Navbar from '@/components/Navbar';
 import { useRouter } from 'next/router';
 

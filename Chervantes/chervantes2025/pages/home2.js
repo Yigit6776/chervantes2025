@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { db } from "../firebaseConfig";
+import { db } from "../src/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import Navbar from "@/components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";

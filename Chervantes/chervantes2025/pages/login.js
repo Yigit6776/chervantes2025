@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { auth } from "../firebaseConfig";
+import { auth } from "../src/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import Navbar from "@/components/Navbar";

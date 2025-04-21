@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { db } from "../../firebaseConfig";
+import { db } from "../../src/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
 import Link from "next/link"; // 🔥 Link bileşeni eklendi!
 import Navbar from "@/components/Navbar";

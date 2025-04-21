@@ -2,10 +2,10 @@ import "@/styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import '../styles/globals.css'
 
-import { AuthProvider } from '../context/AuthContext';
+import { AuthProvider } from '../src/context/AuthContext';
 
 
-import { SepetProvider } from '../context/SepetContext'
+import { SepetProvider } from '../src/context/SepetContext'
 
 export default function App({ Component, pageProps }) {
   return (

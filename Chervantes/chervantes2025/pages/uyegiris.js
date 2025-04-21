@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { auth, db } from "../firebaseConfig";
+import { auth, db } from "../src/firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import Navbar from "@/components/Navbar";
 

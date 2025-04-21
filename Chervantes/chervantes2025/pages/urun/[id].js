@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { db } from "../../firebaseConfig";
+import { db } from "../../src/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import Navbar from "@/components/Navbar";
-import { useSepet } from "../../context/SepetContext";
+import { useSepet } from "../../src/context/SepetContext";
 
 const UrunDetay = () => {
   const router = useRouter();

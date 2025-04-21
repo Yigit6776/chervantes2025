@@ -1,9 +1,9 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useSepet } from '../context/SepetContext';
+import { useSepet } from '../src/context/SepetContext';
 import Navbar from '@/components/Navbar';
-import { db } from '../firebaseConfig';
+import { db } from '../src/firebaseConfig';
 import { 
   collection,
   doc,
