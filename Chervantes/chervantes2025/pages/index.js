@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import { Adamina, Geist, Geist_Mono } from "next/font/google";
-import styles from "@/styles/Home.module.css";
+import styles from "../styles/Home.module.css";
 import Admin from "./admin";
 import Home2 from "./home2";
 
